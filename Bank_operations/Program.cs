@@ -20,7 +20,8 @@
             customers =new Customer[n];
             for(int i = 0; i < n; i++)
             {
-                Console.WriteLine($"Enter fisrt name of customer {i+1}");
+                
+                Console.WriteLine($"Enter first name of customer {i + 1}");
                 string firstname=Console.ReadLine();
                 Console.WriteLine($"Enter last name of customer {i + 1}");
                 string lastname = Console.ReadLine();
@@ -29,27 +30,17 @@
                 Console.WriteLine($"Enter date of birth of customer {i + 1} in DD/MM/YYYY format");
                 string dob=Console.ReadLine();
                 Console.WriteLine($"Enter mobile number of {i+1}");
-                string mobileno=Console.ReadLine();
-                
+                string mobileno = Console.ReadLine();
+                if(mobileno.Length != 10)
+                {
+                    Console.WriteLine("you have entered invalid mobile number.....please enter a valid number ");
+                    mobileno = Console.ReadLine();
+                }
                 customers[i] = new Customer() {Firstname=firstname,Lastname=lastname,Village=villagename,DOB=dob,Mobileno=mobileno };
                 
 
             }
 
-        }
-        public void ValidateMobileno() 
-        {
-            string mobileno;
-            for(int i = 0; i < n;i++)
-            {
-                if ((customers[i].Mobileno).Length != 10)
-                {
-                    Console.WriteLine("you have entered invalid mobile number.....please enter a valid number ");
-                    mobileno = Console.ReadLine();
-                    customers[i].Mobileno = mobileno;
-                }
-            }
-            
         }
         public void randomuserid()
         {
@@ -60,36 +51,32 @@
                 Random rnd = new Random();
                 int randomNum = rnd.Next(1000, 9999);
                 string username = $"{fname}.{lname}{randomNum}";
-
-                Console.WriteLine($"Generated username: {username}");
+                Console.WriteLine($"{customers[i].Firstname} username: {username}");
                 customers[i].Username = username;
             }
         }
         public void show()
         {
             Console.WriteLine("Enter last name of the customer:");
-            string lname=Console.ReadLine();
-            for( int i = 0; i < n; i++)
+            string lname = Console.ReadLine();
+            for ( int i = 0; i < n; i++)
             {
                 if (customers[i].Lastname == lname)
-                {
-                    Console.WriteLine($"{ customers[i].Firstname}\t{customers[i].Lastname}");
-                    Console.WriteLine(customers[i].DOB);
-                    Console.WriteLine(customers[i].Village);
-                    Console.WriteLine(customers[i].Mobileno);
-                    Console.WriteLine(customers[i].Username);
+                {   
+                    Console.WriteLine($"{ customers[i].Firstname}\t\t{customers[i].Lastname}\t\t{customers[i].Village}\t\t{customers[i].DOB}\t\t{customers[i].Mobileno}\t\t{customers[i].Username}");
+                  
                 }
             }
         }
         public void samevillage()
         {
            Console.WriteLine("enter a village name");
-            string vname=Console.ReadLine();    
+           string vname=Console.ReadLine();
             for (int i = 0;i < n; i++)
             {
                 if (customers[i].Village == vname)
-                {
-                    Console.WriteLine(customers[i].Firstname);
+                { 
+                    Console.WriteLine($"{customers[i].Firstname} \t {customers[i].Lastname} \t {customers[i].Village} \t {customers[i].DOB} \t {customers[i].Mobileno} \t {customers[i].Username}");
                 }
             }
         }
@@ -101,7 +88,6 @@
         {
             Bank bank = new Bank();
             bank.details();
-            bank.ValidateMobileno();
             bank.randomuserid();
             bank.show();
             bank.samevillage();
